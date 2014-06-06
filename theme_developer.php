@@ -23,4 +23,14 @@ if ( function_exists( 'override_function' ) ) {
 	}
 
 	add_action( 'init', 'theme_developer_init_action' );
+
+	function theme_developer_template_include( $template ) {
+		global $theme_developer_template_name;
+		$theme_developer_template_name = $template;
+		require( __DIR__ . "/template-wrapper.php" );
+
+		return false;
+	}
+
+	add_filter( 'template_include', 'theme_developer_template_include', 666, 1 );
 }
